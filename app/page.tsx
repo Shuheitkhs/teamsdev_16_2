@@ -1,5 +1,11 @@
-import styles from "./page.module.css";
+import "./globals.css";
+import Pagination from "@/app/components/Pagination";
 
 export default function Home() {
-  return <p>Hello World!</p>;
+  return (
+    <>
+      <p className="text-red-500 text-bold">Hello world!!</p>
+      <Pagination />
+    </>
+  );
 }
