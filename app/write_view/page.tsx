@@ -1,14 +1,44 @@
-import Image from "next/image";
-import React from "react";
+"use client";
+import React, { useRef, useState } from "react";
 
-const Write_view = () => {
+const WriteView = () => {
+  const inputImageRef = useRef<HTMLInputElement|null>(null);
+  // 投稿する写真の保存
+  const [blogImage, setBlogImage] = useState("");
+
+  //Upload Imageボタンが押された際にinputを押下
+  const clickUploadImage = () => {
+    inputImageRef.current?.click();
+  };
+
+  //追加したい写真を選択
+  const onChangeUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // 型エラーの解消
+    const target = e.target as HTMLInputElement;
+    const file = (target.files as FileList)[0];
+    if (file) {
+      // 取得した写真のURLを作成
+      setBlogImage(window.URL.createObjectURL(file));
+    }
+  };
+
   return (
     <div>
       <input placeholder="Title"></input>
       <form>
-        {/* 投稿写真の追加 */}
         <div>
-          <button>Upload Image</button>
+          {/* 選択した写真を表示 */}
+          {blogImage && <img src={blogImage} alt="uploadImage" />}
+          <button onClick={clickUploadImage} type="button">
+            Upload Image
+          </button>
+          <input
+            type="file"
+            onChange={onChangeUploadImage}
+            ref={inputImageRef}
+            accept="image/*"
+            style={{ display: "none" }}
+          />
         </div>
         {/* 投稿文内容の追加 */}
         <div>
@@ -21,4 +51,4 @@ const Write_view = () => {
   );
 };
 
-export default Write_view;
+export default WriteView;
