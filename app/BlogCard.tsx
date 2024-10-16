@@ -1,18 +1,23 @@
+import Image from "next/image"
+
 export default function BlogCard() {
     return (
-        <div>
+        <article>
             <div>
-                <h3>Blog Title</h3>
+                <Image src="" alt="Profile" />
             </div>
             <div>
-                <div>Profile Picture</div>
+                <h3>Post Title</h3>
             </div>
             <div>
-                <div>Thumbnail</div>
+                <div>Category</div>
             </div>
             <div>
-                <p>Contents</p>
+                <div>Author</div>
             </div>
-        </div>
+            <div>
+                <div>Time</div>
+            </div>
+        </article>
     )
 }
