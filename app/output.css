@@ -154,6 +154,10 @@ html,
   -moz-tab-size: 4;
   /* 3 */
   -o-tab-size: 4;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   tab-size: 4;
   /* 3 */
   font-family: Roboto, sans-serif;
@@ -199,6 +203,10 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 
 abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   text-decoration: underline dotted;
 }
 
@@ -1215,6 +1223,10 @@ video {
 
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1222,6 +1234,10 @@ video {
 
 .-translate-x-2\/4 {
   --tw-translate-x: -50%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1229,6 +1245,10 @@ video {
 
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1236,6 +1256,10 @@ video {
 
 .-translate-y-1\/4 {
   --tw-translate-y: -25%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1243,6 +1267,10 @@ video {
 
 .-translate-y-2\/4 {
   --tw-translate-y: -50%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1250,6 +1278,10 @@ video {
 
 .translate-x-2\/4 {
   --tw-translate-x: 50%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1257,6 +1289,10 @@ video {
 
 .translate-y-2\/4 {
   --tw-translate-y: 50%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1271,6 +1307,10 @@ video {
 
 .rotate-180 {
   --tw-rotate: 180deg;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1279,6 +1319,10 @@ video {
 .scale-100 {
   --tw-scale-x: 1;
   --tw-scale-y: 1;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1286,6 +1330,10 @@ video {
 
 .scale-x-0 {
   --tw-scale-x: 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1293,6 +1341,10 @@ video {
 
 .scale-x-100 {
   --tw-scale-x: 1;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1324,6 +1376,10 @@ video {
 
 .select-none {
   -webkit-user-select: none;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   -moz-user-select: none;
   user-select: none;
 }
@@ -1346,6 +1402,10 @@ video {
 
 .appearance-none {
   -webkit-appearance: none;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   -moz-appearance: none;
   appearance: none;
 }
@@ -2304,16 +2364,28 @@ video {
 
 .bg-clip-text {
   -webkit-background-clip: text;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   background-clip: text;
 }
 
 .object-cover {
   -o-object-fit: cover;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   object-fit: cover;
 }
 
 .object-center {
   -o-object-position: center;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   object-position: center;
 }
 
@@ -2954,6 +3026,10 @@ video {
 
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+<<<<<<< HEAD
+=======
+  --tw-ring-shadow: 0 0 #0000, var(--tw-shadow);
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color),
     0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
@@ -2963,6 +3039,10 @@ video {
 .shadow-2xl {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
@@ -2978,6 +3058,10 @@ video {
 
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
     0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
@@ -2987,6 +3071,10 @@ video {
 .shadow-none {
   --tw-shadow: 0 0 rgb(0, 0 / 0, 0);
   --tw-shadow-colored: 0 0 var(--tw-shadow-color);
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
@@ -3212,6 +3300,10 @@ video {
 
 .backdrop-blur-2xl {
   --tw-backdrop-blur: blur(40px);
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness)
     var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale)
     var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
@@ -3226,6 +3318,10 @@ video {
 
 .backdrop-blur-sm {
   --tw-backdrop-blur: blur(4px);
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness)
     var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale)
     var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
@@ -3240,6 +3336,10 @@ video {
 
 .backdrop-saturate-200 {
   --tw-backdrop-saturate: saturate(2);
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness)
     var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale)
     var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
@@ -3427,6 +3527,10 @@ a {
 .before\:-translate-x-2\/4::before {
   content: var(--tw-content);
   --tw-translate-x: -50%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -3435,6 +3539,10 @@ a {
 .before\:-translate-y-2\/4::before {
   content: var(--tw-content);
   --tw-translate-y: -50%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -3733,6 +3841,10 @@ a {
 .after\:scale-x-0::after {
   content: var(--tw-content);
   --tw-scale-x: 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -3741,6 +3853,10 @@ a {
 .after\:scale-x-100::after {
   content: var(--tw-content);
   --tw-scale-x: 1;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -4347,6 +4463,10 @@ a {
 .hover\:scale-110:hover {
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -4581,6 +4701,10 @@ a {
 .focus\:scale-110:focus {
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -4749,6 +4873,10 @@ a {
 .focus\:shadow-none:focus {
   --tw-shadow: 0 0 rgb(0, 0 / 0, 0);
   --tw-shadow-colored: 0 0 var(--tw-shadow-color);
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
@@ -4881,6 +5009,10 @@ a {
 .active\:scale-100:active {
   --tw-scale-x: 1;
   --tw-scale-y: 1;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -4996,6 +5128,10 @@ a {
 .active\:shadow-none:active {
   --tw-shadow: 0 0 rgb(0, 0 / 0, 0);
   --tw-shadow-colored: 0 0 var(--tw-shadow-color);
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
@@ -5028,6 +5164,10 @@ a {
 .disabled\:shadow-none:disabled {
   --tw-shadow: 0 0 rgb(0, 0 / 0, 0);
   --tw-shadow-colored: 0 0 var(--tw-shadow-color);
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
@@ -5635,6 +5775,10 @@ a {
 .peer:focus ~ .peer-focus\:after\:scale-x-100::after {
   content: var(--tw-content);
   --tw-scale-x: 1;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -6137,6 +6281,10 @@ a {
 
 .\[\&\:\:-moz-range-thumb\]\:appearance-none::-moz-range-thumb {
   -moz-appearance: none;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   appearance: none;
 }
 
@@ -6246,6 +6394,10 @@ a {
 
 .\[\&\:\:-webkit-slider-thumb\]\:appearance-none::-webkit-slider-thumb {
   -webkit-appearance: none;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dad2dc72302519d0a365ec1e7941225a4c47edb5
   appearance: none;
 }
 
