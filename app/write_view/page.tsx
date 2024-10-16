@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
 
-const write_view = () => {
+const Write_view = () => {
   return (
     <div>
-      <h1>Title</h1>
+      <input placeholder="Title"></input>
       <form>
         {/* 投稿写真の追加 */}
         <div>
@@ -12,7 +12,7 @@ const write_view = () => {
         </div>
         {/* 投稿文内容の追加 */}
         <div>
-          <p>投稿内容の追加する文字を入力</p>
+          <textarea placeholder="ブログ本文を入力してください"></textarea>
         </div>
       </form>
       {/* 投稿するボタン */}
@@ -21,4 +21,4 @@ const write_view = () => {
   );
 };
 
-export default write_view;
+export default Write_view;
