@@ -18,6 +18,9 @@ export default function BlogCard() {
       <div>
         <div>Time</div>
       </div>
+      <div>
+        <div>Contents</div>
+      </div>
     </article>
   );
 }
