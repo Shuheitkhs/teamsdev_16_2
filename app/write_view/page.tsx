@@ -1,10 +1,9 @@
 "use client";
 import React, { useRef, useState } from "react";
-import Image from 'next/image'
-
+import Image from "next/image";
 
 const WriteView = () => {
-  const inputImageRef = useRef<HTMLInputElement|null>(null);
+  const inputImageRef = useRef<HTMLInputElement | null>(null);
   // 投稿する写真の保存
   const [blogImage, setBlogImage] = useState("");
 
@@ -13,7 +12,7 @@ const WriteView = () => {
     inputImageRef.current?.click();
   };
 
-  //追加したい写真を選択
+  //追加したい写真を選択P
   const onChangeUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     // 型エラーの解消
     const target = e.target as HTMLInputElement;
@@ -30,7 +29,9 @@ const WriteView = () => {
       <form>
         <div>
           {/* 選択した写真を表示 */}
-          {blogImage && <Image src={blogImage} alt="uploadImage" width={500} height={500}/>}
+          {blogImage && (
+            <Image src={blogImage} alt="uploadImage" width={500} height={500} />
+          )}
           <button onClick={clickUploadImage} type="button">
             Upload Image
           </button>
