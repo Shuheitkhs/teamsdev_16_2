@@ -2,11 +2,11 @@ export type ButtonProps = {
   size?: "small" | "medium" | "large";
   bgColor: "blue" | "black" | "red" | "gray" | "white";
   textColor?: "white" | "black";
-  rounded?: "lg" | "full"; //lgは角丸、fullは半円
+  rounded: "lg" | "full"; //lgは角丸、fullは半円
+  className?: string;
   // ここまでスタイリングのプロップス
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
-  className?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -14,9 +14,9 @@ const Button: React.FC<ButtonProps> = ({
   bgColor,
   textColor,
   rounded,
+  className,
   onClick,
   children,
-  className,
 }) => {
   let sizeClass = "";
   switch (size) {
@@ -79,7 +79,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${sizeClass} ${bgColorClass} ${textColorClass} ${roundedClass} px-3 py-1 m-1 hover:scale-105 transition-transform duration-100 active:scale-95 ${className || ""}`}
+      className={`${sizeClass} ${bgColorClass} ${textColorClass} ${roundedClass} ${className || ""} px-3 py-1 m-1 hover:scale-105 transition-transform duration-100 active:scale-95 `}
       onClick={onClick}
     >
       {children}
