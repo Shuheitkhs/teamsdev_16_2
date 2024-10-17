@@ -23,18 +23,43 @@ const DemoPlayPage = () => {
           </Button>
         </div>
         <div>
-          <Button size="medium" textColor="black" bgColor="red" rounded="full">
+          <Button
+            size="medium"
+            textColor="black"
+            bgColor="red"
+            rounded="full"
+            onClick={handleOnClick}
+          >
             hogehoge
           </Button>
         </div>
         <div>
-          <Button size="large" textColor="black" bgColor="gray" rounded="full">
+          <Button
+            size="large"
+            textColor="black"
+            bgColor="gray"
+            rounded="full"
+            onClick={handleOnClick}
+          >
             テスト3
           </Button>
         </div>
 
-        <Button textColor="white" bgColor="black" rounded="lg">
+        <Button
+          textColor="white"
+          bgColor="black"
+          rounded="lg"
+          onClick={handleOnClick}
+        >
           テスト4
+        </Button>
+        <Button
+          textColor="white"
+          bgColor="gray"
+          rounded="full"
+          className="px-10"
+        >
+          最終テスト
         </Button>
       </div>
     </>
