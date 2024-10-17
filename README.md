@@ -59,11 +59,16 @@ stateDiagram-v2
 ```
 
 ### Pull Requestを出すときの注意点
+
 * 自分が作業したところのみが差分として検出されていることを確認する
 * descriptionの頭に"close #○○"（○○はissueの番号）を入れる
   * これがあるとPull Requestをマージしたときそのissueが自動でcloseされて便利
 * ReviewersにPMを指定する
-* assigneesに作業者自身とReviewersを指定する
+* Assigneesに作業者自身とReviewersを指定する
+* Pull Requestを出したらSlack上でReviewersにレビュー依頼を出す
+  * メールも来るがSlackの方が気づきやすいので
+* レビュー依頼のSlackにはPull Request URLも含める
+  * 該当のPull Requestがすぐ分かる 
 
 ## 開発 Tips
 
