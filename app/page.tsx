@@ -1,5 +1,9 @@
-import styles from "./page.module.css";
+import "./globals.css";
 
 export default function Home() {
-  return <p>Hello World!</p>;
+  return (
+    <>
+      <p>Hello world!!</p>
+    </>
+  );
 }
