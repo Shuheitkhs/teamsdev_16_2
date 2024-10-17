@@ -28,6 +28,43 @@ cp .env.example .env
 npm run dev
 ```
 
+## 開発フロー
+
+### 作業始めからpushまで
+
+```mermaid
+stateDiagram-v2
+  direction LR
+  classDef hidden display: none;
+
+  S1: mainブランチに<br>切り替えて最新化する<br>*$ git checkout main*<br>*$ git pull*
+  S2: mainブランチから<br>作業ブランチを作成して<br>切り替える<br>*$ git checkout -b ブランチ名*
+  S3: npm installをかける<br>*$ npm install*
+  S4: 作業する
+  [*] --> S1
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+  S4 --> INTERLUDE1:::hidden
+
+  S5: lint、formatをかける<br>*$ npm run lint*<br>*$ npm run format*
+  S6: 実行して動かしてみる<br>*$ npm run dev*
+  S7: 修正したファイルをaddしてcommitする<br>*$ git add ファイル名*<br>*$ git commit -m "メッセージ"*
+  S8: 作業ブランチをpushする<br>*$ git push --set-upstream origin ブランチ名*
+  INTERLUDE2:::hidden --> S5
+  S5 --> S6
+  S6 --> S7
+  S7 --> S8
+  S8 --> [*]
+```
+
+### Pull Requestを出すときの注意点
+* 自分が作業したところのみが差分として検出されていることを確認する
+* descriptionの頭に"close #○○"（○○はissueの番号）を入れる
+  * これがあるとPull Requestをマージしたときそのissueが自動でcloseされて便利
+* ReviewersにPMを指定する
+* assigneesに作業者自身とReviewersを指定する
+
 ## 開発 Tips
 
 ### Issue
