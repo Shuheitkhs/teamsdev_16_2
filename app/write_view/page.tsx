@@ -1,5 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
+import Image from 'next/image'
+
 
 const WriteView = () => {
   const inputImageRef = useRef<HTMLInputElement|null>(null);
@@ -28,7 +30,7 @@ const WriteView = () => {
       <form>
         <div>
           {/* 選択した写真を表示 */}
-          {blogImage && <img src={blogImage} alt="uploadImage" />}
+          {blogImage && <Image src={blogImage} alt="uploadImage" width={500} height={500}/>}
           <button onClick={clickUploadImage} type="button">
             Upload Image
           </button>
