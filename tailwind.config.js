@@ -1,5 +1,3 @@
-const { Balance } = require("@mui/icons-material");
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -21,6 +19,6 @@ module.exports = {
         foreground: "var(--foreground)",
       },
     },
-    plugins: [],
   },
+  plugins: [],
 };
