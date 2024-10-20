@@ -1,12 +1,19 @@
 import React from "react";
+import Link from "next/link";
 
 const Header = () => {
   return (
     <header>
       <span>LOGO</span>
-      <button>Home</button>
-      <button>Create</button>
-      <button>Sign In</button>
+      <Link href="/home">
+        <button>Home</button>
+      </Link>
+      <Link href="/write_view">
+        <button>Create</button>
+      </Link>
+      <Link href="sign_in">
+        <button>Sign In</button>
+      </Link>
     </header>
   );
 };
