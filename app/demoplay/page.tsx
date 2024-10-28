@@ -19,7 +19,7 @@ const DemoPlayPage = () => {
             rounded="lg"
             onClick={handleOnClick}
           >
-            テスト1
+            Small
           </Button>
         </div>
         <div>
@@ -30,7 +30,7 @@ const DemoPlayPage = () => {
             rounded="full"
             onClick={handleOnClick}
           >
-            hogehoge
+            medium
           </Button>
         </div>
         <div>
@@ -41,7 +41,7 @@ const DemoPlayPage = () => {
             rounded="full"
             onClick={handleOnClick}
           >
-            テスト3
+            large
           </Button>
         </div>
 
@@ -51,15 +51,7 @@ const DemoPlayPage = () => {
           rounded="lg"
           onClick={handleOnClick}
         >
-          テスト4
-        </Button>
-        <Button
-          textColor="white"
-          bgColor="gray"
-          rounded="full"
-          className="px-10"
-        >
-          最終テスト
+          テスト
         </Button>
       </div>
     </>
