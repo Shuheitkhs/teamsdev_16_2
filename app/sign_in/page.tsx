@@ -80,7 +80,7 @@ const SignIn = () => {
       <div className="flex items-center mt-4">
         <span>Don&apos;t have an account?</span>
         <Link href="/sign_up">
-          <span className="text-blue ml-1 hover:border-b-2 hover:text-sky-700">
+          <span className="text-blue-500 ml-1 hover:border-b-2 border-blue-700 hover:text-blue-700">
             sign Up
           </span>
         </Link>

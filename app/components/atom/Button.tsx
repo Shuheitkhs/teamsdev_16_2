@@ -35,34 +35,34 @@ const Button: React.FC<ButtonProps> = ({
   let bgColorClass = "";
   switch (bgColor) {
     case "blue":
-      bgColorClass = "bg-blue";
+      bgColorClass = "bg-bblue";
       break;
     case "black":
-      bgColorClass = "bg-black";
+      bgColorClass = "bg-bblack";
       break;
     case "red":
-      bgColorClass = "bg-red";
+      bgColorClass = "bg-bred";
       break;
     case "gray":
-      bgColorClass = "bg-gray";
+      bgColorClass = "bg-bgray";
       break;
     case "white":
-      bgColorClass = "bg-white";
+      bgColorClass = "bg-bwhite";
       break;
     default:
-      bgColorClass = "bg-black";
+      bgColorClass = "bg-bblack";
   }
 
   let textColorClass = "";
   switch (textColor) {
     case "black":
-      textColorClass = "text-black";
+      textColorClass = "text-bblack";
       break;
     case "white":
-      textColorClass = "text-white";
+      textColorClass = "text-bwhite";
       break;
     default:
-      textColorClass = "white";
+      textColorClass = "bwhite";
   }
 
   let roundedClass = "";
