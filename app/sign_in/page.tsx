@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "../components/atom/Button";
 import supabase from "@/lib/Supabase/Client";
 import { useRouter } from "next/navigation";
-// import { login } from "./actions";
+import Link from "next/link";
 
 const SignIn = () => {
   const router = useRouter();
@@ -29,9 +29,14 @@ const SignIn = () => {
       if (signInError) {
         throw signInError;
       }
+      console.log("サインイン成功");
       await router.push("/");
-    } catch {
-      alert("エラーが発生しました");
+    } catch (signInError) {
+      if (signInError instanceof Error) {
+        alert(`エラーが発生しました: ${signInError.message}`);
+      } else {
+        alert("エラーが発生しました");
+      }
     }
   };
 
@@ -44,7 +49,7 @@ const SignIn = () => {
           <p className="text-gray-800">Email</p>
           <input
             type="email"
-            placeholder="Enter your name"
+            placeholder="Enter your Email"
             className="bg-gray-200 shadow border-2 border-gray-400 appearance-none rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
             onChange={inputEmail}
             value={email}
@@ -55,7 +60,7 @@ const SignIn = () => {
           <p className="text-gray-800">Password</p>
           <input
             type="password"
-            placeholder="Enter your name"
+            placeholder="Enter your Password"
             className="bg-gray-200 shadow border-2 border-gray-400 appearance-none rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
             onChange={inputPassword}
             value={password}
@@ -71,10 +76,14 @@ const SignIn = () => {
           Sign In
         </Button>
       </form>
-      {/* サインアップリンク */}
+      {/* サインアップへのリンク */}
       <div className="flex items-center mt-4">
         <span>Don&apos;t have an account?</span>
-        <span className="text-blue-400 ml-1"> sign Up</span>
+        <Link href="/sign_up">
+          <span className="text-blue ml-1 hover:border-b-2 hover:text-sky-700">
+            sign Up
+          </span>
+        </Link>
       </div>
     </div>
   );
