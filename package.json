@@ -11,6 +11,9 @@
     "check": "prettier ./**/*.{ts,tsx,css} --check"
   },
   "dependencies": {
+    "@blocknote/core": "^0.18.0",
+    "@blocknote/mantine": "^0.18.1",
+    "@blocknote/react": "^0.18.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@material-tailwind/react": "^2.1.10",
