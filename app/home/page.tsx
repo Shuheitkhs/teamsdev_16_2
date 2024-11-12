@@ -1,16 +1,16 @@
 'use client';
 
-import styles from "./page.module.css";
-import Header from "../components/Header";
 import Pagination from "../components/Pagination";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import BlogCard from "../BlogCard";
 import supabase from "@/lib/Supabase/Client";
 
 // Post型の定義
 interface Post {
   id: string;
+  user_id: string;
   title: string;
   image_path: string;
   scr: string;
@@ -29,26 +29,6 @@ interface Post {
   };
 }
 
-// postsとcategoriesのデータをjoinして取得
-const tableFetch = async () => {
-  try {
-    const { data, error } = await supabase
-      .from("posts")
-      .select(`
-        *,
-        categories(*)
-      `);
-
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    return data;
-  } catch (error) {
-    console.error('データの取得に失敗しました:', error);
-    throw new Error('データの取得に失敗しました');
-  }
-};
 
 // 認証情報（ユーザー情報）を取得
 const getAuthUser = async () => {
@@ -70,8 +50,29 @@ export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [imageUrls, setImageUrls] = useState<{ [key: string]: string }>({});
-  const [userName, setUserName] = useState<string | null>(null); 
+   const [userName, setUserName] = useState<string | null>(null); 
+
+  // postsとcategoriesのデータをjoinして取得
+const tableFetch = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("posts")
+      .select(`
+        *,
+        categories(*)
+      `);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error('データの取得に失敗しました:', error);
+    throw new Error('データの取得に失敗しました');
+  }
+};
+
 
   // データを取得する
   useEffect(() => {
@@ -110,46 +111,9 @@ export default function Home() {
     fetchUserEmail();
   }, []);
 
-  useEffect(() => {
-    const fetchImage = async (postId: string, imagePath: string) => {
-      try {
-        const { data, error } = await supabase
-          .storage
-          .from("photo_test") // バケット名
-          .download(imagePath); // 画像のパス
-
-        if (error) {
-          console.error("画像の取得エラー:", error.message);
-          return;
-        }
-        if (!data) {
-          console.error("画像データが null または undefined です");
-          return;
-        }
-
-        const objectUrl = URL.createObjectURL(data);
-        setImageUrls((prevState) => ({
-          ...prevState,
-          [postId]: objectUrl,
-        }));
-      } catch (err) {
-        console.error("エラー:", err);
-      }
-    };
-
-    posts.forEach((post) => {
-      if (post.image_path) {
-        fetchImage(post.id, post.image_path);
-      }
-    });
-  }, [posts]);  // posts が更新されたときに画像を再取得
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error:{error}</p>;
-
   return (
     <>
-      <Header />
+
       <main>
         <input type="text" />
         <button>Search button</button>
@@ -160,11 +124,11 @@ export default function Home() {
             <li key={post.id}>
               <Link href={`/blog_view/${post.id}`}>
                 <BlogCard
-                  src={imageUrls[post.id] || ""}
+                  src={post?.image_path ? `/${post.image_path}` : "/default.png"}
                   alt={post.title}
                   title={post.title}
                   category={post.categories ? post.categories.name : "Uncategorized"}
-                  author={post.user && post.user.name ? post.user.name : "Unknown Author"}
+                  author={post.user_id || "Unknown Author"}
                   createdAt={new Date(post.created_at).toLocaleDateString()}
                   content={post.content}
                 />

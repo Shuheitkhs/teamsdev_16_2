@@ -1,26 +1,42 @@
 import Image from "next/image";
 
-export default function BlogCard() {
+type BlogCardProps = {
+  src:string;
+  alt: string;
+  title: string;
+  category: string;
+  author:string;
+  createdAt: string;
+  content: string;
+};
+
+export default function BlogCard({
+  src,
+  alt,
+  title,
+  category,
+  author,
+  createdAt,
+  content,
+}: BlogCardProps) {
+
   return (
     <article>
       <div>
-        <Image src="" alt="Profile" />
+        <Image
+          src={src}
+          alt={alt}
+          width={300} // 必要に応じて調整
+          height={300}
+        />
       </div>
       <div>
-        <h3>Post Title</h3>
+        <h3>{title}</h3>
       </div>
-      <div>
-        <div>Category</div>
-      </div>
-      <div>
-        <div>Author</div>
-      </div>
-      <div>
-        <div>Time</div>
-      </div>
-      <div>
-        <div>Contents</div>
-      </div>
+      <div>{category}</div>
+      <div>{author}</div>
+      <div>{createdAt}</div>
+      <div>{content}</div>
     </article>
   );
 }
