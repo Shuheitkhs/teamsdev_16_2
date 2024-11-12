@@ -59,11 +59,6 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
-      {/* ヘッダー */}
-      <div className="bg-gray-300 h-15">
-        ヘッダーコンポーネント作成後、ここにヘッダーが入ります。
-      </div>
-
       {/* メインコンテンツ部分 */}
       <div className="bg-white sm:bg-gray-300 m-10 sm:p-10">
         <div className="flex justify-center sm:justify-between items-center">
