@@ -1,11 +1,15 @@
 "use client";
 
 import supabase from "@/lib/Supabase/Client";
-import React, { useCallback, useEffect, useState } from "react";
+
+import { useCallback, useEffect, useState } from "react";
+import Button from "./atom/Button";
 
 const Header = () => {
+  // ユーザー名を表示するためのstate
   const [showUserName, setShowUserName] = useState("");
 
+  // セッションを取得するための関数
   const fetchSession = useCallback(async () => {
     try {
       const { data, error } = await supabase.auth.getSession();
@@ -31,12 +35,24 @@ const Header = () => {
   }, [fetchSession]);
 
   return (
-    <header>
-      <span>LOGO</span>
-      <button>Home</button>
-      <button>Create</button>
-      <button>Sign In</button>
-      <div>email:{showUserName}</div>
+    <header className="flex justify-between items-center p-4 bg-gray-300">
+      <span className="text-2xl font-bold">LOGO</span>
+      <div className="flex items-center space-x-4">
+        <Button bgColor="black" size="small" textColor="white" rounded="full">
+          Home
+        </Button>
+        <Button bgColor="black" size="small" textColor="white" rounded="full">
+          Create
+        </Button>
+        {/* ログインしているかどうかによって表示を変える */}
+        {showUserName === "" ? (
+          <Button bgColor="gray" size="small" textColor="black" rounded="full">
+            Sign In
+          </Button>
+        ) : (
+          <div>email:{showUserName}</div>
+        )}
+      </div>
     </header>
   );
 };
