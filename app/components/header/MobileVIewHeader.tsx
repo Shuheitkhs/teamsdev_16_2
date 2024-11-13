@@ -53,4 +53,4 @@ const MobileViewHeader = () => {
   );
 };
 
-export default mobileVIewHeader;
+export default MobileViewHeader;
