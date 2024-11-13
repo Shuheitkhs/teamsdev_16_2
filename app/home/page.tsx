@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import Header from "../components/Header";
+import Header from "../components/header/Header";
 import Pagination from "../components/Pagination";
 
 export default function Home() {

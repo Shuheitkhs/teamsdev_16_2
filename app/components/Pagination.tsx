@@ -8,6 +8,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import useWideScreen from "../hooks/useWideScreen";
 
 export default function Pagination() {
+  // 画面サイズを取得するカスタムフック
   const isWideScreen = useWideScreen();
   return (
     <div className="flex justify-center">
