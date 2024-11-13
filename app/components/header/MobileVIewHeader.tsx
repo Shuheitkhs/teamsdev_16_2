@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
 import Button from "../atom/Button";
 import UserIcon from "./UserIcon";
-const mobileVIewHeader = () => {
+const MobileViewHeader = () => {
   // ハンバーガーメニューの表示/非表示を管理するstate
   const [isToggle, setIsToggle] = useState(false);
   const handleToggle = () => {
