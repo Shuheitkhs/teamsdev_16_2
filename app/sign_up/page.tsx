@@ -39,7 +39,7 @@ const SignUp = () => {
 
           <input
             type="email"
-            {...register("email", {
+            {...register("Email", {
               required: "Emailが入力されていません",
               pattern: {
                 value:
