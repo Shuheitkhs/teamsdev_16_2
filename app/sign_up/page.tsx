@@ -39,7 +39,14 @@ const SignUp = () => {
 
           <input
             type="email"
-            {...register("Email", { required: "Emailが入力されていません" })}
+            {...register("email", {
+              required: "Emailが入力されていません",
+              pattern: {
+                value:
+                  /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/, //メールアドレスの正規表現
+                message: "メールアドレスを正しく入力してください",
+              },
+            })}
           />
           <p className="text-red-500">{errors.Email?.message as ReactNode}</p>
         </div>
