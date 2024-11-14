@@ -26,8 +26,8 @@ const SignUp = () => {
             {...register("Name", {
               required: "Nameが入力されていません",
               maxLength: {
-                value: 20,
-                message: "Nameは20文字以内としてください",
+                value: 30,
+                message: "Nameは30文字以内としてください",
               },
             })}
           />
@@ -49,7 +49,7 @@ const SignUp = () => {
           <input
             type="password"
             {...register("Password", {
-              required: "パスワードを入力していください",
+              required: "パスワードを入力してください",
               minLength: {
                 value: 8,
                 message: "パスワードは８文字以上にしてください",
