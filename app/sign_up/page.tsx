@@ -36,6 +36,7 @@ const SignUp = () => {
         <div>
           <p>Email</p>
           <input
+          
             type="email"
             {...register("email", {
               required: "Emailが入力されていません",
