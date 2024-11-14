@@ -19,12 +19,12 @@ const SignIn = () => {
     formState: { errors },
   } = useForm<signIn>({ mode: "onChange" });
 
-  // emailのインプット管理ハンドラー   
+  // emailのインプット管理ハンドラー
   const inputEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  // passwordのインプット管理ハンドラー  
+  // passwordのインプット管理ハンドラー
   const inputPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
@@ -57,7 +57,7 @@ const SignIn = () => {
       <h1 className="text-2xl font-bold underline py-5">Sign In</h1>
       <form
         className="flex flex-col items-center"
-        onSubmit={handleSubmit((signInData)=>handleSignIn(signInData))}
+        onSubmit={handleSubmit((signInData) => handleSignIn(signInData))}
       >
         {/* Emailのインプット */}
         <div>
@@ -74,7 +74,7 @@ const SignIn = () => {
             type="email"
             placeholder="Enter your Email"
             className="bg-gray-200 shadow border-2 border-gray-400 appearance-none rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-            onChange={inputEmail}  
+            onChange={inputEmail}
             value={email}
           />
           <p className="text-red-500">{errors.email?.message as ReactNode}</p>
@@ -92,7 +92,7 @@ const SignIn = () => {
             onChange={inputPassword}
             value={password}
           />
-        <p className='text-red-500'>{errors.password?.message}</p>
+          <p className="text-red-500">{errors.password?.message}</p>
         </div>
         {/* サインインボタン */}
         <Button
