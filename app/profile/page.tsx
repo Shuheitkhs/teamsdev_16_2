@@ -90,7 +90,7 @@ export default function Profile() {
         </ul>
       </main>
       <footer className="text-center">
-       <Pagination />
+        <Pagination />
       </footer>
     </div>
   );
