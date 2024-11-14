@@ -2,7 +2,6 @@ import Image from "next/image";
 
 type BlogCardProps = {
   src:string;
-  alt: string;
   title: string;
   category: string;
   author:string;
@@ -10,24 +9,23 @@ type BlogCardProps = {
   content: string;
 };
 
-export default function BlogCard({
+const BlogCard: React.FC<BlogCardProps> = ({
   src,
-  alt,
   title,
   category,
   author,
   createdAt,
   content,
-}: BlogCardProps) {
-
+}) => {
   return (
     <article>
       <div>
         <Image
           src={src}
-          alt={alt}
-          width={300} // 必要に応じて調整
+          alt={`画像:${title}`}
+          width={300}
           height={300}
+          priority
         />
       </div>
       <div>
@@ -40,3 +38,5 @@ export default function BlogCard({
     </article>
   );
 }
+
+export default BlogCard;

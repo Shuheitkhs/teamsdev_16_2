@@ -30,86 +30,67 @@ interface Post {
 }
 
 
-// 認証情報（ユーザー情報）を取得
-const getAuthUser = async () => {
-  try {
-    const { data, error } = await supabase.auth.getUser();  // 非同期でユーザー情報を取得
+// // 認証情報（ユーザー情報）を取得
+// const getAuthUser = async () => {
+//   try {
+//     const { data, error } = await supabase.auth.getUser();  // 非同期でユーザー情報を取得
 
-    if (error || !data) {
-      throw new Error('ユーザーが認証されていません');
-    }
+//     if (error || !data) {
+//       throw new Error('ユーザーが認証されていません');
+//     }
 
-    return data;  
-  } catch (error) {
-    console.error('認証エラー:', error);
-    throw new Error('認証エラーが発生しました');
-  }
-};
+//     return data;  
+//   } catch (error) {
+//     console.error('認証エラー:', error);
+//     throw new Error('認証エラーが発生しました');
+//   }
+// };
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-   const [userName, setUserName] = useState<string | null>(null); 
 
-  // postsとcategoriesのデータをjoinして取得
-const tableFetch = async () => {
-  try {
-    const { data, error } = await supabase
+  // データを取得する
+  useEffect(() => {
+    const fecthPosts =async() => {
+      const {data: postData, error: postError} = await supabase
       .from("posts")
       .select(`
         *,
         categories(*)
-      `);
+        `);
 
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    return data;
-  } catch (error) {
-    console.error('データの取得に失敗しました:', error);
-    throw new Error('データの取得に失敗しました');
-  }
-};
-
-
-  // データを取得する
-  useEffect(() => {
-    async function loadPosts() {
-      try {
-        setIsLoading(true);
-        const fetchedPosts = await tableFetch();
-        if (fetchedPosts) {
-          console.log(fetchedPosts);
-          setPosts(fetchedPosts);
-        } else {
-          setError("データの取得に失敗しました。");
+        if(postError) {
+          console.error("postの取得でエラーが発生しました:",postError.message);
+          setError(postError.message);
+        } else if (postData) {
+          setPosts(postData);
         }
-      } catch (err) {
-        setError("エラーが発生しました。" + (err instanceof Error ? err.message : String(err)));
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    loadPosts();
+        setIsLoading(false); 
+      }     
+        fecthPosts();
   }, []);
 
+  // ローディング中の場合にメッセージを表示
+if (isLoading) {
+  return <div>Loading...</div>;
+}
 
-  // サインインしているユーザー情報を取得
-  useEffect(() => {
-    async function fetchUserEmail() {
-      try {
-        const user = await getAuthUser();
-        setUserName(user.name); 
-      } catch (err) {
-        // setError("ユーザー情報の取得に失敗しました。" + (err instanceof Error ? err.message : String(err)));
-      }
-    }
 
-    fetchUserEmail();
-  }, []);
+  // // サインインしているユーザー情報を取得
+  // useEffect(() => {
+  //   async function fetchUserEmail() {
+  //     try {
+  //       const user = await getAuthUser();
+  //       setUserName(user.name); 
+  //     } catch (err) {
+  //       // setError("ユーザー情報の取得に失敗しました。" + (err instanceof Error ? err.message : String(err)));
+  //     }
+  //   }
+
+  //   fetchUserEmail();
+  // }, []);
 
   return (
     <>
@@ -120,21 +101,26 @@ const tableFetch = async () => {
         
         <ul className="flex border">
           {/* BlogCardコンポーネントを使いリスト表示 */}
-          {posts.map((post) => (
+          {posts.map((post) => {
+
+          const dateToShow = post.updated_at ? post.updated_at : post.created_at;
+          const displayDate = new Date(dateToShow).toLocaleDateString();
+
+          return (
             <li key={post.id}>
               <Link href={`/blog_view/${post.id}`}>
                 <BlogCard
                   src={post?.image_path ? `/${post.image_path}` : "/default.png"}
-                  alt={post.title}
                   title={post.title}
                   category={post.categories ? post.categories.name : "Uncategorized"}
                   author={post.user_id || "Unknown Author"}
-                  createdAt={new Date(post.created_at).toLocaleDateString()}
+                  createdAt={displayDate}
                   content={post.content}
                 />
               </Link>
             </li>
-          ))}
+          );
+        })}
         </ul>
         <Pagination />
       </main>
