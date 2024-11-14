@@ -9,16 +9,15 @@ const WriteView = () => {
   // 写真追加Inputをrefへ
   const inputImageRef = useRef<HTMLInputElement | null>(null);
   // 投稿する写真を表示
-  const [viewBlogImage, setViewBlogImage] = useState("");
-  //投稿する写真の保存
-  const [blogImage, setBlogImage] = useState<string | null>(null);
+  const [viewBlogImage, setViewBlogImage] = useState<string>();
   // 投稿するBlogTitleを格納
   const [blogAddTitle, setBlogAddTitle] = useState("");
   // 投稿するBlog
   const [blogAddContent, setBlogAddContent] = useState("");
+  // 投稿する写真のファイル
+  const [postImage, setPostImage] = useState<File | null>();
   // 現在のユーザ情報を取得
   const currentUser = supabase.auth.getSession();
-  console.log(currentUser);
 
   //初期画面titleInputにカーソルを合わせる
   useEffect(() => {
@@ -26,7 +25,27 @@ const WriteView = () => {
   }, []);
 
   const clickAddBlog = async (e: React.FormEvent) => {
+    // 登録ボタン押下時のリロードをキャンセル
     e.preventDefault();
+
+    // 投稿する画像URL格納変数
+    let postImageURL = "";
+
+    if (postImage) {
+      const ImageURL = `PostPhoto/${postImage?.name}`; // 画像の保存先のpathを指定
+      const { error } = await supabase.storage
+        .from("writeViewImage")
+        .upload(ImageURL, postImage); //supabaseのstorageへ写真を登録する
+      if (error) {
+        console.log(error, "supabaseへ写真登録処理に失敗しました");
+        return;
+      }
+
+      const { data: postData } = supabase.storage
+        .from("writeViewImage")
+        .getPublicUrl(ImageURL);
+      const postImageURL = postData.publicUrl;
+    }
     const { data, error } = await supabase
       .from("posts")
       .insert([
@@ -35,16 +54,14 @@ const WriteView = () => {
           category_id: "75fb1104-ddc7-4ea8-8433-dad355c0a98c",
           title: blogAddTitle,
           content: blogAddContent,
-          image_path: blogImage,
+          image_path: postImageURL,
         },
       ]) //id系は仮のユーザ本来はログインしているユーザ
-      .select();
-
     if (error) {
-      console.log(error);
+      console.log(error,'postsへの投稿の処理でエラーが発生しました。');
+      return
     }
-    console.log(data);
-    return data;
+    ;
   };
 
   //Upload Imageボタンが押された際にinputを押下
@@ -53,25 +70,14 @@ const WriteView = () => {
   };
 
   //追加したい写真を選択
-  const onChangeUploadImage = async (e: React.FormEvent) => {
-    // 型エラーの解消
-    const target = e.target as HTMLInputElement;
-    const file = (target.files as FileList)[0];
-    const filePath = `my_folder/${file.name}`; // 画像の保存先のpathを指定
-    const { error } = await supabase.storage
-      .from("posts")
-      .upload(filePath, file);
-    if (error) {
-      console.log(error, "supabaseへファイルの処理に失敗しました");
-    }
-    const { data } = supabase.storage.from("posts").getPublicUrl(filePath);
-    const fileUrl = data.publicUrl;
-    setBlogImage(fileUrl);//投稿する写真をsupabaseへ登録
-    if (file) {
-      setViewBlogImage(window.URL.createObjectURL(file));//投稿する写真を表示
+  const onChangeUploadImage = async (e: React.FormEvent<HTMLInputElement>) => {
+    // 選択した写真のファイルを取得
+    const targetImage = e.currentTarget.files?.[0];
+    if (targetImage) {
+      setViewBlogImage(window.URL.createObjectURL(targetImage));
+      setPostImage(targetImage);
     }
   };
-
   return (
     <div className="">
       <form onSubmit={clickAddBlog}>
@@ -84,9 +90,9 @@ const WriteView = () => {
         ></input>
         <div>
           {/* 選択した写真を表示 */}
-          {blogImage && (
+          {postImage && (
             <Image
-              src={viewBlogImage}
+              src={viewBlogImage as string}
               alt="uploadImage"
               width={500}
               height={500}
@@ -103,7 +109,6 @@ const WriteView = () => {
             style={{ display: "none" }}
           />
         </div>
-        {/* 投稿文内容の追加 */}
         <div>
           <textarea
             onChange={(e) => setBlogAddContent(e.target.value)}
@@ -112,7 +117,6 @@ const WriteView = () => {
         </div>
         <button type="submit">Create</button>
       </form>
-      {/* 投稿するボタン */}
     </div>
   );
 };
