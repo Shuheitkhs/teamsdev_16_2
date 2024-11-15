@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Pagination from "../components/Pagination";
 import { useEffect, useState } from "react";
@@ -29,7 +29,6 @@ interface Post {
   };
 }
 
-
 // // 認証情報（ユーザー情報）を取得
 // const getAuthUser = async () => {
 //   try {
@@ -39,7 +38,7 @@ interface Post {
 //       throw new Error('ユーザーが認証されていません');
 //     }
 
-//     return data;  
+//     return data;
 //   } catch (error) {
 //     console.error('認証エラー:', error);
 //     throw new Error('認証エラーが発生しました');
@@ -53,37 +52,35 @@ export default function Home() {
 
   // データを取得する
   useEffect(() => {
-    const fecthPosts =async() => {
-      const {data: postData, error: postError} = await supabase
-      .from("posts")
-      .select(`
+    const fecthPosts = async () => {
+      const { data: postData, error: postError } = await supabase.from("posts")
+        .select(`
         *,
         categories(*)
         `);
 
-        if(postError) {
-          console.error("postの取得でエラーが発生しました:",postError.message);
-          setError(postError.message);
-        } else if (postData) {
-          setPosts(postData);
-        }
-        setIsLoading(false); 
-      }     
-        fecthPosts();
+      if (postError) {
+        console.error("postの取得でエラーが発生しました:", postError.message);
+        setError(postError.message);
+      } else if (postData) {
+        setPosts(postData);
+      }
+      setIsLoading(false);
+    };
+    fecthPosts();
   }, []);
 
   // ローディング中の場合にメッセージを表示
-if (isLoading) {
-  return <div>Loading...</div>;
-}
-
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   // // サインインしているユーザー情報を取得
   // useEffect(() => {
   //   async function fetchUserEmail() {
   //     try {
   //       const user = await getAuthUser();
-  //       setUserName(user.name); 
+  //       setUserName(user.name);
   //     } catch (err) {
   //       // setError("ユーザー情報の取得に失敗しました。" + (err instanceof Error ? err.message : String(err)));
   //     }
@@ -94,33 +91,35 @@ if (isLoading) {
 
   return (
     <>
-
       <main>
         <input type="text" />
         <button>Search button</button>
-        
-        <ul className="flex border">
+
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
           {/* BlogCardコンポーネントを使いリスト表示 */}
           {posts.map((post) => {
+            const dateToShow = post.updated_at
+              ? post.updated_at
+              : post.created_at;
+            const displayDate = new Date(dateToShow).toLocaleDateString();
 
-          const dateToShow = post.updated_at ? post.updated_at : post.created_at;
-          const displayDate = new Date(dateToShow).toLocaleDateString();
-
-          return (
-            <li key={post.id}>
-              <Link href={`/blog_view/${post.id}`}>
-                <BlogCard
-                  src={post.image_path || "/default.png"}
-                  title={post.title}
-                  category={post.categories ? post.categories.name : "Uncategorized"}
-                  author={post.user_id || "Unknown Author"}
-                  createdAt={displayDate}
-                  content={post.content}
-                />
-              </Link>
-            </li>
-          );
-        })}
+            return (
+              <li key={post.id}>
+                <Link href={`/blog_view/${post.id}`}>
+                  <BlogCard
+                    src={post.image_path || "/default.png"}
+                    title={post.title}
+                    category={
+                      post.categories ? post.categories.name : "Uncategorized"
+                    }
+                    author={post.user_id || "Unknown Author"}
+                    createdAt={displayDate}
+                    content={post.content}
+                  />
+                </Link>
+              </li>
+            );
+          })}
         </ul>
         <Pagination />
       </main>
