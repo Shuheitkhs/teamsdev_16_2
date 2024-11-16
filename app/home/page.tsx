@@ -23,27 +23,7 @@ interface Post {
     id: string;
     name: string;
   };
-  user: {
-    id: string;
-    name: string;
-  };
 }
-
-// // 認証情報（ユーザー情報）を取得
-// const getAuthUser = async () => {
-//   try {
-//     const { data, error } = await supabase.auth.getUser();  // 非同期でユーザー情報を取得
-
-//     if (error || !data) {
-//       throw new Error('ユーザーが認証されていません');
-//     }
-
-//     return data;
-//   } catch (error) {
-//     console.error('認証エラー:', error);
-//     throw new Error('認証エラーが発生しました');
-//   }
-// };
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -52,7 +32,7 @@ export default function Home() {
 
   // データを取得する
   useEffect(() => {
-    const fecthPosts = async () => {
+    const fetchPosts = async () => {
       const { data: postData, error: postError } = await supabase.from("posts")
         .select(`
         *,
@@ -67,7 +47,7 @@ export default function Home() {
       }
       setIsLoading(false);
     };
-    fecthPosts();
+    fetchPosts();
   }, []);
 
   // ローディング中の場合にメッセージを表示
@@ -75,27 +55,10 @@ export default function Home() {
     return <div>Loading...</div>;
   }
 
-  // // サインインしているユーザー情報を取得
-  // useEffect(() => {
-  //   async function fetchUserEmail() {
-  //     try {
-  //       const user = await getAuthUser();
-  //       setUserName(user.name);
-  //     } catch (err) {
-  //       // setError("ユーザー情報の取得に失敗しました。" + (err instanceof Error ? err.message : String(err)));
-  //     }
-  //   }
-
-  //   fetchUserEmail();
-  // }, []);
-
   return (
     <>
       <main>
-        <input type="text" />
-        <button>Search button</button>
-
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-10">
           {/* BlogCardコンポーネントを使いリスト表示 */}
           {posts.map((post) => {
             const dateToShow = post.updated_at
