@@ -4,6 +4,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import supabase from "@/lib/Supabase/Client";
+import Button from "@/app/components/atom/Button";
 
 type Post = {
   id: string;
@@ -61,26 +62,29 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
     <div>
       {/* メインコンテンツ部分 */}
       <div className="bg-white sm:bg-gray-300 m-10 sm:p-10">
-        <div className="flex justify-center sm:justify-between items-center">
-          <h1 className="text-4xl">{post?.title}</h1>
+        <div className="flex justify-center sm:justify-between items-center space-y-5">
+          <h1 className="text-3xl">{post?.title}</h1>
           <AccountCircleIcon className="hidden sm:block" fontSize="large" />
         </div>
-        <Image
-          src={post?.image_path || "/default.png"}
-          alt="ここに画像が入ります。"
-          width={500}
-          height={300}
-        />
+        <div className="flex justify-center p-2">
+          <Image
+            src={post?.image_path || "/default.jpg "}
+            alt="ここに画像が入ります。"
+            width={500}
+            height={300}
+          />
+        </div>
+
         <div>{post?.content}</div>
       </div>
 
       {/* More Posts部分 */}
       <div className="m-10">
         <div className="text-2xl">More Posts</div>
-        <div className="flex flex-col sm:flex-row justify-between">
+        <div className="flex flex-col items-center sm:flex-row justify-between">
           <div className="p-4">
             <Image
-              src="/default.png"
+              src="/default.jpg"
               alt="ここに画像が入ります。"
               width={200}
               height={150}
@@ -89,7 +93,7 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
           </div>
           <div className="p-4">
             <Image
-              src="/default.png"
+              src="/default.jpg"
               alt="ここに画像が入ります。"
               width={200}
               height={150}
@@ -98,7 +102,7 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
           </div>
           <div className="p-4">
             <Image
-              src="/default.png"
+              src="/default.jpg"
               alt="ここに画像が入ります。"
               width={200}
               height={150}
@@ -112,10 +116,13 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
       <div className="m-10">
         <div className="text-3xl">Comments</div>
         <div className="flex flex-col sm:flex-row justify-center">
-          <input placeholder="Add Your Comment" className="border-2 p-2 mr-2" />
-          <button className="bg-sky-500 text-white px-4 py-2">
-            仮のボタン
-          </button>
+          <input
+            placeholder="Add Your Comment"
+            className="border-2 p-2 mr-2 rounded-lg"
+          />
+          <Button bgColor="blue" textColor="white" size="small" rounded="lg">
+            Comment
+          </Button>
         </div>
         <div className="flex flex-col items-center mt-4">
           {comments.length > 0 ? (
