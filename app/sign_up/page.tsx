@@ -3,8 +3,10 @@ import { SignUpData } from "@/Types";
 import React, { ReactNode, useState } from "react";
 import { useForm } from "react-hook-form";
 import { supabase } from "../utils/supabaes";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
+  const router=useRouter()
   //useFormを使ってバリデーションのチェック
   const {
     register,
@@ -27,11 +29,14 @@ const SignUp = () => {
     } catch (error: any) {
       if (error.message == "User already registered") {
         setSignUpError("すでに登録されているユーザです");
+        return
       } else {
         console.log("すでに登録はされていません");
       }
       console.log(error, "ユーザ登録に失敗しました");
+      return 
     }
+router.push("/sign_in")
   };
 
   return (
