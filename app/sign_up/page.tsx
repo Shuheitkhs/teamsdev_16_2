@@ -1,6 +1,8 @@
 "use client";
-import React, { ReactNode } from "react";
+import { SignUpData } from "@/Types";
+import React, { ReactNode, useState } from "react";
 import { useForm } from "react-hook-form";
+import { supabase } from "../utils/supabaes";
 
 const SignUp = () => {
   //useFormを使ってバリデーションのチェック
@@ -8,25 +10,45 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onChange" });
+  } = useForm<SignUpData>({ mode: "onChange" });
+  const [signUpError, setSignUpError] = useState("");
 
-  const clickSignUp = (data: any) => {
-    console.log(data);
+  const clickSignUp = async (signUpData: SignUpData) => {
+    console.log(signUpData);
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: signUpData.email,
+        password: signUpData.password,
+      });
+      console.log(data, "ユーザ登録に成功しました");
+      if (error) {
+        throw error;
+      }
+    } catch (error: any) {
+      if (error.message == "User already registered") {
+        setSignUpError("すでに登録されているユーザです");
+      } else {
+        console.log("すでに登録はされていません");
+      }
+      console.log(error, "ユーザ登録に失敗しました");
+    }
   };
 
   return (
     <div>
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit(clickSignUp)}>
+      <form onSubmit={handleSubmit((signUpData) => clickSignUp(signUpData))}>
+        <p className="text-red-500">{signUpError}</p>
         <div>
           <p>Name</p>
+          {/* Nameのバリデーションをチェックしエラーメッセージを表示 */}
           <input
             type="text"
             {...register("name", {
               required: "Nameが入力されていません",
               maxLength: {
-                value: 20,
-                message: "Nameは20文字以内としてください",
+                value: 30,
+                message: "Nameは30文字以内としてください",
               },
             })}
           />
@@ -34,28 +56,38 @@ const SignUp = () => {
         </div>
         <div>
           <p>Email</p>
+          {/* Nameがバリデーションをチェックしエラーメッセージを表示 */}
           <input
             type="email"
-            {...register("email", { required: "Emailが入力されていません" })}
+            {...register("email", {
+              required: "Emailが入力されていません",
+              pattern: {
+                value:
+                  /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/, //メールアドレスの正規表現
+                message: "メールアドレスを正しく入力してください",
+              },
+            })}
           />
           <p className="text-red-500">{errors.email?.message as ReactNode}</p>
         </div>
         <div>
-          <p>Password</p>
+          <p>PassWord</p>
+          {/* Passwordのバリデーションをチェックしエラーメッセージを表示 */}
           <input
             type="password"
             {...register("password", {
               required: "パスワードを入力してください",
               minLength: {
                 value: 8,
-                message: "パスワードは8文字以上にしてください",
+                message: "パスワードは８文字以上にしてください",
               },
             })}
-            autoComplete="new-password"
           />
-          <p className="text-red-500">{errors.password?.message as ReactNode}</p>
+          <p className="text-red-500">
+            {errors.password?.message as ReactNode}
+          </p>
         </div>
-        <button type="submit">Sign Up</button>
+        <button>Sign Up</button>
       </form>
       <span>Already have an account?</span>
       <span> sign in</span>
