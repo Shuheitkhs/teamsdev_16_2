@@ -20,54 +20,42 @@ const SignUp = () => {
       <form onSubmit={handleSubmit(clickSignUp)}>
         <div>
           <p>Name</p>
-          {/* Nameのバリデーションをチェックしエラーメッセージを表示 */}
           <input
             type="text"
-            {...register("Name", {
+            {...register("name", {
               required: "Nameが入力されていません",
               maxLength: {
-                value: 30,
-                message: "Nameは30文字以内としてください",
+                value: 20,
+                message: "Nameは20文字以内としてください",
               },
             })}
           />
-          <p className="text-red-500">{errors.Name?.message as ReactNode}</p>
+          <p className="text-red-500">{errors.name?.message as ReactNode}</p>
         </div>
         <div>
           <p>Email</p>
-          {/* Nameがバリデーションをチェックしエラーメッセージを表示 */}
-
           <input
             type="email"
-            {...register("Email", {
-              required: "Emailが入力されていません",
-              pattern: {
-                value:
-                  /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/, //メールアドレスの正規表現
-                message: "メールアドレスを正しく入力してください",
-              },
-            })}
+            {...register("email", { required: "Emailが入力されていません" })}
           />
-          <p className="text-red-500">{errors.Email?.message as ReactNode}</p>
+          <p className="text-red-500">{errors.email?.message as ReactNode}</p>
         </div>
         <div>
-          <p>PassWord</p>
-          {/* Passwordのバリデーションをチェックしエラーメッセージを表示 */}
+          <p>Password</p>
           <input
             type="password"
-            {...register("Password", {
+            {...register("password", {
               required: "パスワードを入力してください",
               minLength: {
                 value: 8,
-                message: "パスワードは８文字以上にしてください",
+                message: "パスワードは8文字以上にしてください",
               },
             })}
+            autoComplete="new-password"
           />
-          <p className="text-red-500">
-            {errors.Password?.message as ReactNode}
-          </p>
+          <p className="text-red-500">{errors.password?.message as ReactNode}</p>
         </div>
-        <button>Sign Up</button>
+        <button type="submit">Sign Up</button>
       </form>
       <span>Already have an account?</span>
       <span> sign in</span>
