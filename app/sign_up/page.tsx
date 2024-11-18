@@ -6,7 +6,7 @@ import { supabase } from "../utils/supabaes";
 import { useRouter } from "next/navigation";
 
 const SignUp = () => {
-  const router=useRouter()
+  const router = useRouter();
   //useFormを使ってバリデーションのチェック
   const {
     register,
@@ -16,7 +16,6 @@ const SignUp = () => {
   const [signUpError, setSignUpError] = useState("");
 
   const clickSignUp = async (signUpData: SignUpData) => {
-    console.log(signUpData);
     try {
       const { data, error } = await supabase.auth.signUp({
         email: signUpData.email,
@@ -29,14 +28,14 @@ const SignUp = () => {
     } catch (error: any) {
       if (error.message == "User already registered") {
         setSignUpError("すでに登録されているユーザです");
-        return
+        return;
       } else {
         console.log("すでに登録はされていません");
       }
       console.log(error, "ユーザ登録に失敗しました");
-      return 
+      return;
     }
-router.push("/sign_in")
+    router.push("/sign_in");
   };
 
   return (
