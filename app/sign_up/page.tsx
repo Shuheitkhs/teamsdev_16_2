@@ -2,8 +2,8 @@
 import { SignUpData } from "@/Types";
 import React, { ReactNode, useState } from "react";
 import { useForm } from "react-hook-form";
-import { supabase } from "../utils/supabaes";
 import { useRouter } from "next/navigation";
+import supabase from "@/lib/Supabase/Client";
 
 const SignUp = () => {
   const router = useRouter();
