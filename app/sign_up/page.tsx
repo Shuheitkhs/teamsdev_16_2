@@ -4,6 +4,7 @@ import React, { ReactNode, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import supabase from "@/lib/Supabase/Client";
+import  Button from "../components/atom/Button";
 
 const SignUp = () => {
   const router = useRouter();
@@ -39,15 +40,18 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit((signUpData) => clickSignUp(signUpData))}>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-2xl font-bold underline py-5">Sign Up</h1>
+      <form onSubmit={handleSubmit((signUpData) => clickSignUp(signUpData))} 
+            className="flex flex-col items-center">
         <p className="text-red-500">{signUpError}</p>
-        <div>
-          <p>Name</p>
+        <div className="py-5">
+          <p className="text-gray-800">Name</p>
           {/* Nameのバリデーションをチェックしエラーメッセージを表示 */}
           <input
             type="text"
+            placeholder="Enter your Name"
+            className="bg-gray-200 shadow border-2 border-gray-400 appearance-none rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
             {...register("name", {
               required: "Nameが入力されていません",
               maxLength: {
@@ -58,11 +62,13 @@ const SignUp = () => {
           />
           <p className="text-red-500">{errors.name?.message as ReactNode}</p>
         </div>
-        <div>
-          <p>Email</p>
+        <div className="py-5">
+          <p className="text-gray-800">Email</p>
           {/* Nameがバリデーションをチェックしエラーメッセージを表示 */}
           <input
             type="email"
+            placeholder="Enter your Email"
+            className="bg-gray-200 shadow border-2 border-gray-400 appearance-none rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
             {...register("email", {
               required: "Emailが入力されていません",
               pattern: {
@@ -74,11 +80,13 @@ const SignUp = () => {
           />
           <p className="text-red-500">{errors.email?.message as ReactNode}</p>
         </div>
-        <div>
-          <p>PassWord</p>
+        <div className="py-5">
+          <p className="text-gray-800">Password</p>
           {/* Passwordのバリデーションをチェックしエラーメッセージを表示 */}
           <input
             type="password"
+            placeholder="Enter your Password"
+            className="bg-gray-200 shadow border-2 border-gray-400 appearance-none rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
             {...register("password", {
               required: "パスワードを入力してください",
               minLength: {
@@ -91,10 +99,18 @@ const SignUp = () => {
             {errors.password?.message as ReactNode}
           </p>
         </div>
-        <button>Sign Up</button>
+        <Button
+          size="small"
+          bgColor="blue"
+          rounded="full"
+        >
+          Sign Up
+        </Button>
       </form>
-      <span>Already have an account?</span>
-      <span> sign in</span>
+      <div className="flex items-center mt-4">
+        <span>Already have an account?</span>
+        <span className="text-blue-500 ml-1 hover:border-b-2 border-blue-700 hover:text-blue-700">Sign In</span>
+      </div>
     </div>
   );
 };
