@@ -7,6 +7,7 @@ export type ButtonProps = {
   // ここまでスタイリングのプロップス
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
+  type?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
   onClick,
   children,
+  type,
 }) => {
   let sizeClass = "";
   switch (size) {
@@ -79,7 +81,8 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${sizeClass} ${bgColorClass} ${textColorClass} ${roundedClass} ${className || ""} px-3 py-1 m-1 hover:scale-105 transition-transform duration-100 active:scale-95 `}
+      className={`${sizeClass} ${bgColorClass} ${textColorClass} ${roundedClass} ${type}
+      ${className || ""} px-3 py-1 m-1 hover:scale-105 transition-transform duration-100 active:scale-95 `}
       onClick={onClick}
     >
       {children}

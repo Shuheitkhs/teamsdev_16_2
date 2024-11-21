@@ -1,11 +1,8 @@
-import BlogCard from "../BlogCard";
-
-export default function Blog_dummy() {
+import Comment from "../components/Comment";
+export const Blog_dummy = () => {
   return (
     <div>
-      <BlogCard />
-      <BlogCard />
-      <BlogCard />
+      <Comment />
     </div>
   );
-}
+};

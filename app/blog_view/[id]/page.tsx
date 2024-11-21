@@ -18,7 +18,7 @@ type Post = {
 type Comment = {
   id: string;
   user_id: string;
-  post_id?: string;
+  post_id: string;
   content: string;
 };
 
@@ -26,8 +26,9 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
   const [post, setPost] = useState<Post | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
 
+  // postの取得
   useEffect(() => {
-    const fetchPostAndComments = async () => {
+    const fetchPost = async () => {
       const { data: postData, error: postError } = await supabase
         .from("posts")
         .select("*")
@@ -39,24 +40,70 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
       } else if (postData) {
         setPost(postData);
       }
-
-      const { data: commentsData, error: commentsError } = await supabase
-        .from("comments")
-        .select("*")
-        .eq("post_id", params.id);
-
-      if (commentsError) {
-        console.error(
-          "コメントの取得でエラーが発生しました:",
-          commentsError.message,
-        );
-      } else if (commentsData) {
-        setComments(commentsData);
-      }
     };
 
-    fetchPostAndComments();
+    fetchPost();
   }, [params.id]);
+
+  // コメントの取得
+  const fetchComments = async () => {
+    const { data: commentsData, error: commentsError } = await supabase
+      .from("comments")
+      .select("*")
+      .eq("post_id", params.id);
+
+    if (commentsError) {
+      console.error(
+        "コメントの取得でエラーが発生しました:",
+        commentsError.message,
+      );
+    } else if (commentsData) {
+      setComments(commentsData);
+    }
+  };
+  fetchComments();
+
+  // コメントの投稿フォーム
+  const [formComment, setFormComment] = useState("");
+
+  const isCommentValid = formComment.length >= 10;
+
+  // コメントの投稿
+  const handleCommentSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      // ユーザーのセッションの確認
+      const { data: sessionData, error: sessionError } =
+        await supabase.auth.getSession();
+      if (sessionError || !sessionData?.session) {
+        console.error(
+          "セッション取得でエラーが発生しました。",
+          sessionError?.message,
+        );
+        return;
+      }
+      // 取得したセッションをデータにuserに設定
+      const user = sessionData.session.user;
+
+      if (!isCommentValid) {
+        alert("コメントは10文字以上入力してください。");
+        return;
+      }
+      // コメントの投稿
+      const { error } = await supabase.from("comments").insert([
+        {
+          user_id: user.id,
+          post_id: params.id,
+          content: formComment,
+        },
+      ]);
+      if (error) throw error;
+      setFormComment("");
+      await fetchComments(); // コメントを再取得
+    } catch (error) {
+      alert("データの新規登録ができません");
+    }
+  };
 
   return (
     <div>
@@ -114,16 +161,43 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
 
       {/* コメント部分 */}
       <div className="m-10">
-        <div className="text-3xl">Comments</div>
-        <div className="flex flex-col sm:flex-row justify-center">
-          <input
-            placeholder="Add Your Comment"
-            className="border-2 p-2 mr-2 rounded-lg"
-          />
-          <Button bgColor="blue" textColor="white" size="small" rounded="lg">
-            Comment
-          </Button>
+        {/* コメントのタイトル */}
+        <div className="text-3xl">
+          <h3>Comments</h3>
         </div>
+        {/* コメントの投稿フォーム */}
+        <div>
+          <div className="flex flex-col sm:flex-row justify-center items-center">
+            <form onSubmit={handleCommentSubmit}>
+              <input
+                placeholder="Add Your Comment"
+                className="border-2 p-2 mr-2 rounded-lg"
+                onChange={(e) => setFormComment(e.target.value)}
+                value={formComment}
+              />
+              <Button
+                bgColor="blue"
+                textColor="white"
+                size="small"
+                rounded="lg"
+                type="submit"
+              >
+                Comment
+              </Button>
+            </form>
+          </div>
+          <div className="flex justify-center">
+            {!isCommentValid && formComment.length > 0 ? (
+              <p className="text-red-500">
+                コメントは10文字以上入力してください
+              </p>
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+
+        {/* コメントの表示 */}
         <div className="flex flex-col items-center mt-4">
           {comments.length > 0 ? (
             comments.map((comment) => (
