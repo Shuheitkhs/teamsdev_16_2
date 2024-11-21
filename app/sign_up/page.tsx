@@ -4,7 +4,7 @@ import React, { ReactNode, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import supabase from "@/lib/Supabase/Client";
-import  Button from "../components/atom/Button";
+import Button from "../components/atom/Button";
 import Link from "next/link";
 
 const SignUp = () => {
@@ -43,8 +43,10 @@ const SignUp = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <h1 className="text-2xl font-bold underline py-5">Sign Up</h1>
-      <form onSubmit={handleSubmit((signUpData) => clickSignUp(signUpData))} 
-            className="flex flex-col items-center">
+      <form
+        onSubmit={handleSubmit((signUpData) => clickSignUp(signUpData))}
+        className="flex flex-col items-center"
+      >
         <p className="text-red-500">{signUpError}</p>
         <div className="py-5">
           <p className="text-gray-800">Name</p>
@@ -100,11 +102,7 @@ const SignUp = () => {
             {errors.password?.message as ReactNode}
           </p>
         </div>
-        <Button
-          size="small"
-          bgColor="blue"
-          rounded="full"
-        >
+        <Button size="small" bgColor="blue" rounded="full">
           Sign Up
         </Button>
       </form>
