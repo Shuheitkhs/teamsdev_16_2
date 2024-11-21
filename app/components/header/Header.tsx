@@ -1,8 +1,8 @@
 "use client";
 
 import useWideScreen from "../../hooks/useWideScreen";
-import MobileViewHeader from "./MobileViewHeader";
-import WideViewHeader from "./WideViewHeader";
+import MobileViewHeader from "@/app/components/header/MobileViewHeader";
+import WideViewHeader from "@/app/components/header/WideViewHeader";
 
 const Header = () => {
   // 画面サイズを感知するhooks
