@@ -26,7 +26,7 @@ const MobileViewHeader = () => {
       )}
       {isToggle && (
         <div className="flex flex-col items-center rounded-lg p-3 z-0 absolute top-14 right-0 bg-gray-400">
-          <Link href="/">
+          <Link href="/home">
             <Button
               bgColor="black"
               size="small"

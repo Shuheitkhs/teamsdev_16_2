@@ -75,7 +75,11 @@ const UserIcon = () => {
                   >
                     Logout
                   </Button>
-                  <div>email: {showUserName}</div>
+                  <Link href="/profile">
+                    <div className="hover:text-blue-500 ">
+                      email: {showUserName}
+                    </div>
+                  </Link>
                 </div>
               </div>
             </>
