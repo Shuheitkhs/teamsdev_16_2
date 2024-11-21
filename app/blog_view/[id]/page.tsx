@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import supabase from "@/lib/Supabase/Client";
 import Button from "@/app/components/atom/Button";
+import Link from "next/link";
 
 type Post = {
   id: string;
@@ -20,6 +21,12 @@ type Comment = {
   user_id: string;
   post_id: string;
   content: string;
+};
+
+type MorePosts = {
+  id: string;
+  title: string;
+  image_path: string;
 };
 
 const BlogViewPage = ({ params }: { params: { id: string } }) => {
@@ -105,6 +112,33 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
     }
   };
 
+  // morePostsの取得
+  const [morePosts, setMorePosts] = useState<MorePosts[]>([]);
+
+  useEffect(() => {
+    const fetchMorePosts = async () => {
+      const { data: morePostData, error: morePostError } = await supabase
+        .from("posts")
+        .select("id, title, image_path")
+        .eq("category_id", post?.category_id)
+        .neq("id", params.id)
+        .limit(3);
+
+      if (morePostError) {
+        console.error(
+          "関連記事の取得でエラーが発生しました。",
+          morePostError.message,
+        );
+      } else if (morePostData) {
+        setMorePosts(morePostData);
+      }
+    };
+
+    if (post?.category_id) {
+      fetchMorePosts();
+    }
+  }, [post?.category_id, params.id]);
+
   return (
     <div>
       {/* メインコンテンツ部分 */}
@@ -117,45 +151,33 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
           <Image
             src={post?.image_path || "/default.jpg "}
             alt="ここに画像が入ります。"
-            width={500}
-            height={300}
+            width={1600}
+            height={900}
+            className="shadow-lg"
           />
         </div>
 
-        <div>{post?.content}</div>
+        <div className="my-3">{post?.content}</div>
       </div>
 
       {/* More Posts部分 */}
       <div className="m-10">
         <div className="text-2xl">More Posts</div>
         <div className="flex flex-col items-center sm:flex-row justify-between">
-          <div className="p-4">
-            <Image
-              src="/default.jpg"
-              alt="ここに画像が入ります。"
-              width={200}
-              height={150}
-            />
-            <div>Post Title 1</div>
-          </div>
-          <div className="p-4">
-            <Image
-              src="/default.jpg"
-              alt="ここに画像が入ります。"
-              width={200}
-              height={150}
-            />
-            <div>Post Title 2</div>
-          </div>
-          <div className="p-4">
-            <Image
-              src="/default.jpg"
-              alt="ここに画像が入ります。"
-              width={200}
-              height={150}
-            />
-            <div>Post Title 3</div>
-          </div>
+          {morePosts.map((morePost) => (
+            <div key={morePost.id} className="p-4">
+              <Link href={`/blog_view/${morePost.id}`}>
+                <Image
+                  src={morePost.image_path || "/default.png"}
+                  alt="ここに画像が入ります。"
+                  width={300}
+                  height={200}
+                  className="shadow-lg hover:scale-105 "
+                />
+                <div>{morePost.title}</div>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
 
