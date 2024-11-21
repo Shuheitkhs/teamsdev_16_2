@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import supabase from "@/lib/Supabase/Client";
 import  Button from "../components/atom/Button";
+import Link from "next/link";
 
 const SignUp = () => {
   const router = useRouter();
@@ -109,7 +110,11 @@ const SignUp = () => {
       </form>
       <div className="flex items-center mt-4">
         <span>Already have an account?</span>
-        <span className="text-blue-500 ml-1 hover:border-b-2 border-blue-700 hover:text-blue-700">Sign In</span>
+        <Link href="/sign_in">
+          <span className="text-blue-500 ml-1 hover:border-b-2 border-blue-700 hover:text-blue-700">
+            Sign In
+          </span>
+        </Link>
       </div>
     </div>
   );
