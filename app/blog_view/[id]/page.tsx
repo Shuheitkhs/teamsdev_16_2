@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import supabase from "@/lib/Supabase/Client";
 import Button from "@/app/components/atom/Button";
 import Link from "next/link";
+import Comment from "@/app/components/Comment";
 
 type Post = {
   id: string;
@@ -21,6 +22,7 @@ type Comment = {
   user_id: string;
   post_id: string;
   content: string;
+  created_at: string;
 };
 
 type MorePosts = {
@@ -112,9 +114,9 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
     }
   };
 
-  // morePostsの取得
+  // morePostsの状態
   const [morePosts, setMorePosts] = useState<MorePosts[]>([]);
-
+  // morePostsの取得
   useEffect(() => {
     const fetchMorePosts = async () => {
       const { data: morePostData, error: morePostError } = await supabase
@@ -189,7 +191,7 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
         </div>
         {/* コメントの投稿フォーム */}
         <div>
-          <div className="flex flex-col sm:flex-row justify-center items-center">
+          <div className="flex flex-col sm:flex-row justify-center items-center w-full">
             <form onSubmit={handleCommentSubmit}>
               <input
                 placeholder="Add Your Comment"
@@ -223,12 +225,9 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
         <div className="flex flex-col items-center mt-4">
           {comments.length > 0 ? (
             comments.map((comment) => (
-              <div
-                key={comment.id}
-                className="p-4 border-b border-gray-300 w-full"
-              >
+              <Comment key={comment.id} created_at={comment.created_at}>
                 {comment.content}
-              </div>
+              </Comment>
             ))
           ) : (
             <div className="p-4">コメントがありません。</div>
