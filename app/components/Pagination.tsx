@@ -5,24 +5,11 @@ import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { useEffect, useState } from "react";
+import useWideScreen from "../hooks/useWideScreen";
 
 export default function Pagination() {
-  const [isWideScreen, setIsWideScreen] = useState(true);
-  // 画面サイズに応じてDOM操作するuseEffect
-  useEffect(() => {
-    // 画面幅640以上でisWideScreenがtrueに
-    const handleResize = () => {
-      setIsWideScreen(window.innerWidth > 640);
-    };
-    // 初期サイズのチェック
-    handleResize();
-    // 画面幅の監視
-    window.addEventListener("resize", handleResize);
-    // クリーンアップ関数
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+  // 画面サイズを取得するカスタムフック
+  const isWideScreen = useWideScreen();
   return (
     <div className="flex justify-center">
       <Stack spacing={3}>

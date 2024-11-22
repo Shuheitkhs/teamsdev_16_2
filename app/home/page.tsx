@@ -4,7 +4,7 @@ import Pagination from "../components/Pagination";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import BlogCard from "../BlogCard";
+import BlogCard from "../components/BlogCard";
 import supabase from "@/lib/Supabase/Client";
 
 // Post型の定義
