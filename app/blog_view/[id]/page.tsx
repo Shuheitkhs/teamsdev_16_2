@@ -170,7 +170,7 @@ const BlogViewPage = ({ params }: { params: { id: string } }) => {
             <div key={morePost.id} className="p-4">
               <Link href={`/blog_view/${morePost.id}`}>
                 <Image
-                  src={morePost.image_path || "/default.png"}
+                  src={morePost.image_path || "/default.jpg"}
                   alt="ここに画像が入ります。"
                   width={300}
                   height={200}
