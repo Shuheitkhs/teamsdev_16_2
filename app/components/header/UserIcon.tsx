@@ -6,10 +6,14 @@ import { useCallback, useEffect, useState } from "react";
 import Button from "../atom/Button";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CloseIcon from "@mui/icons-material/Close";
+import { useRouter } from "next/navigation";
 
 const UserIcon = () => {
   // ユーザー名を表示するためのstate
   const [showUserName, setShowUserName] = useState("");
+  // ログアウト後のリダイレクトのためにrouterを設定
+  const router = useRouter();
+
   // セッションを取得するための関数
   const fetchSession = useCallback(async () => {
     try {
@@ -38,6 +42,17 @@ const UserIcon = () => {
   // ユーザーアイコンの表示/非表示を切り替える関数
   const handleToggle = () => {
     setOpenToggle(!openToggle);
+  };
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error("ログアウトでエラーが発生しました。", error.message);
+      return;
+    }
+    alert("ログアウトしました。サインインページに戻ります。");
+    router.push("/sign_in");
   };
 
   return (
@@ -72,6 +87,7 @@ const UserIcon = () => {
                     size="small"
                     textColor="white"
                     rounded="full"
+                    onClick={handleLogout}
                   >
                     Logout
                   </Button>

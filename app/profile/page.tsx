@@ -89,7 +89,7 @@ export default function Profile() {
               <li key={post.id}>
                 <Link href={`/blog_view/${post.id}`}>
                   <BlogCard
-                    src={post.image_path || "/default.png"}
+                    src={post.image_path || "/default.jpg"}
                     title={post.title}
                     category={
                       post.categories ? post.categories.name : "Uncategorized"
