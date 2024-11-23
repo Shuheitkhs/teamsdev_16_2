@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import useWideScreen from "../hooks/useWideScreen";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PaginationProps {
   count: number;
@@ -12,14 +12,21 @@ interface PaginationProps {
   onPageChange: (value: number) => void;
 }
 
-export default function Pagination({count,page,onPageChange}:PaginationProps) {
+export default function Pagination({
+  count,
+  page,
+  onPageChange,
+}: PaginationProps) {
   // 画面サイズを取得するカスタムフック
   const isWideScreen = useWideScreen();
 
   // ページ変更の処理
-  const handlePageChange = (event: React.ChangeEvent<unknown>,value: number) => {
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number,
+  ) => {
     onPageChange(value);
-  }
+  };
 
   return (
     <div className="flex justify-center">

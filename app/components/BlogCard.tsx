@@ -21,8 +21,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
   const slicedContent = content.slice(0, 100);
 
   return (
-    <article className="max-w-sm w-full min-h-[450px] border rounded-lg shadow-md p-5 bg-white hover:shadow-2xl transition-shadow duration-300 ease-in-out mx-auto">
-      <div className="flex justify-center mb-4 h-[250px] overflow-hidden">
+    <article className="max-w-sm w-full min-h-[530px] border rounded-lg shadow-md p-5 bg-white hover:shadow-2xl transition-shadow duration-300 ease-in-out mx-auto">
+      <div className="flex justify-center mb-4 overflow-hidden">
         <Image
           src={src}
           alt={`画像:${title}`}

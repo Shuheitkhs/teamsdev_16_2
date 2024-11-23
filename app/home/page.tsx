@@ -31,7 +31,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [currentPage,setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 9;
   const [totalPosts, setTotalPosts] = useState(0);
 
@@ -40,23 +40,26 @@ export default function Home() {
   // ページ変更時に呼ばれる関数
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    router.push(`/home?p=${page}`, undefined)
+    router.push(`/home?p=${page}`, undefined);
   };
 
   // 投稿データの取得
   useEffect(() => {
-  const fetchPosts = async () => {
-    const start = (currentPage - 1) * postsPerPage;
-    const end = currentPage * postsPerPage - 1;
-    
-    const { data: postData, error: postError } = await supabase.from("posts")
-    .select(`
+    const fetchPosts = async () => {
+      const start = (currentPage - 1) * postsPerPage;
+      const end = currentPage * postsPerPage - 1;
+
+      const { data: postData, error: postError } = await supabase
+        .from("posts")
+        .select(
+          `
       *,
       categories(*)
-      `)
-      .range(start,end)
-      .order("updated_at",{ascending: false});
-      
+      `,
+        )
+        .range(start, end)
+        .order("updated_at", { ascending: false });
+
       if (postError) {
         console.error("postの取得でエラーが発生しました:", postError.message);
         setError(postError.message);
@@ -67,18 +70,18 @@ export default function Home() {
     };
 
     // 投稿の総数を取得
-    const fetchTotalPosts = async() => {
-      const {count, error} = await supabase
-      .from("posts")
-      .select("*",{count:"exact"});
-      if(error) {
-        console.log("投稿数の取得でエラーが発生しました:",error.message);
+    const fetchTotalPosts = async () => {
+      const { count, error } = await supabase
+        .from("posts")
+        .select("*", { count: "exact" });
+      if (error) {
+        console.log("投稿数の取得でエラーが発生しました:", error.message);
         setError(error.message);
       } else {
         setTotalPosts(count || 0);
       }
     };
-    
+
     fetchPosts();
     fetchTotalPosts();
   }, [currentPage]);
@@ -90,7 +93,7 @@ export default function Home() {
 
   // エラーが発生した場合にメッセージを表示
   if (error) {
-    return <div>エラーが発生しました: {error}</div>
+    return <div>エラーが発生しました: {error}</div>;
   }
 
   return (
@@ -104,10 +107,6 @@ export default function Home() {
               : post.created_at;
             const displayDate = new Date(dateToShow).toLocaleDateString();
 
-            // contentを100文字にスライスし、100文字を超える場合は「...」を追加
-    const truncatedContent = post.content.slice(0, 100);
-    const contentToDisplay = truncatedContent.length < post.content.length ? `${truncatedContent}...` : truncatedContent;
-
             return (
               <li key={post.id}>
                 <Link href={`/blog_view/${post.id}`}>
@@ -119,7 +118,7 @@ export default function Home() {
                     }
                     author={post.user_id || "Unknown Author"}
                     createdAt={displayDate}
-                    content={contentToDisplay}
+                    content={post.content}
                   />
                 </Link>
               </li>
@@ -127,9 +126,9 @@ export default function Home() {
           })}
         </ul>
         <Pagination
-        count={Math.ceil(totalPosts / postsPerPage)}
-        page={currentPage}
-        onPageChange={handlePageChange}
+          count={Math.ceil(totalPosts / postsPerPage)}
+          page={currentPage}
+          onPageChange={handlePageChange}
         />
       </main>
     </>
