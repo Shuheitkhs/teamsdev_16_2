@@ -30,7 +30,7 @@ const SignIn = () => {
         throw signInError;
       }
       console.log("サインイン成功");
-      router.push("/");
+      router.push("/home");
     } catch (signInError) {
       if (signInError instanceof Error) {
         alert(`エラーが発生しました: ${signInError.message}`);
