@@ -97,6 +97,12 @@ const WriteView = () => {
           .from("posts")
           .update({ image_path: postImageURL.publicUrl })
           .eq("id", postData[0].id); // 投稿IDを基に更新
+        // 投稿成功後メッセージとクリア
+        alert("投稿に成功しました");
+        // formのリセット
+        reset();
+        setViewBlogImage("");
+        setPostImage(null);
       }
     } else {
       //投稿画像がない場合
@@ -109,7 +115,10 @@ const WriteView = () => {
   };
 
   //Upload Imageボタンが押された際にinputを押下
-  const clickUploadImage = () => {
+  const clickUploadImage = (e: React.FormEvent) => {
+    e.preventDefault();
+    setCapacityError("");
+    setImageError("");
     inputImageRef.current?.click();
   };
 
@@ -126,12 +135,6 @@ const WriteView = () => {
         setCapacityError("写真のサイズは5MBまでです");
       }
     } else {
-      //写真がない場合
-      alert("投稿に成功しました");
-      // formのリセット
-      reset();
-      setViewBlogImage("");
-      setPostImage(null);
     }
   };
   return (
@@ -155,19 +158,24 @@ const WriteView = () => {
             })}
           ></input>
         </div>
-        <p className="text-red-500">{errors.title?.message as ReactNode}</p>
-        <div>
+        <p className="text-2xl text-red-500 bold">
+          {errors.title?.message as ReactNode}
+        </p>
+        <div className="mt-14 ">
           {/* 選択した写真を表示 */}
-          <div></div>
-          {postImage && (
-            <Image
-            className="m-auto"
-              src={viewBlogImage as string}
-              alt="uploadImage"
-              width={500}
-              height={500}
-            />
-          )}
+          <div className="border border-dashed border-gray-400 min-h-[400px] flex justify-center items-center">
+            {postImage ? (
+              <Image
+                className="m-auto"
+                src={viewBlogImage as string}
+                alt="uploadImage"
+                width={500}
+                height={500}
+              />
+            ) : (
+              <p className="text-gray-500 ">ここに画像が表示されます</p>
+            )}
+          </div>
           <Button
             size="small"
             bgColor="blue"
@@ -184,8 +192,8 @@ const WriteView = () => {
             ref={inputImageRef}
             onChange={onChangeUploadImage}
           />
-          <p className="text-red-500">{capacityError}</p>
-          <p className="text-red-500">{ImageError}</p>
+          <p className="text-2xl text-red-500 bold">{capacityError}</p>
+          <p className="text-2xl text-red-500 bold">{ImageError}</p>
         </div>
         <div>
           <textarea
@@ -199,12 +207,12 @@ const WriteView = () => {
               },
             })}
           ></textarea>
-          <p className="text-red-500">{errors.content?.message as ReactNode}</p>
+          <p className="text-2xl text-red-500 bold">{errors.content?.message as ReactNode}</p>
         </div>
-        <div className="flex justify-end" >
-        <SubmitButton  size="small" bgColor="blue" rounded="full">
-          Create
-        </SubmitButton>
+        <div className="flex justify-end">
+          <SubmitButton size="small" bgColor="blue" rounded="full">
+            Create
+          </SubmitButton>
         </div>
       </form>
     </div>
