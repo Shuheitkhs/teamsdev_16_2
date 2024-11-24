@@ -1,11 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Pagination from "../components/Pagination";
 import { useEffect, useState } from "react";
 import supabase from "@/lib/Supabase/Client";
 import Link from "next/link";
-import BlogCard from "../BlogCard";
+import BlogCard from "../components/BlogCard";
 
 // Post型の定義
 interface Post {
@@ -89,7 +88,7 @@ export default function Profile() {
               <li key={post.id}>
                 <Link href={`/blog_view/${post.id}`}>
                   <BlogCard
-                    src={post.image_path || "/default.png"}
+                    src={post.image_path || "/default.jpg"}
                     title={post.title}
                     category={
                       post.categories ? post.categories.name : "Uncategorized"
@@ -104,9 +103,7 @@ export default function Profile() {
           })}
         </ul>
       </main>
-      <footer className="text-center">
-        <Pagination />
-      </footer>
+      <footer className="text-center"></footer>
     </div>
   );
 }

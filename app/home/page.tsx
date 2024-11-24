@@ -4,8 +4,9 @@ import Pagination from "../components/Pagination";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import BlogCard from "../BlogCard";
+import BlogCard from "../components/BlogCard";
 import supabase from "@/lib/Supabase/Client";
+import { useRouter } from "next/navigation";
 
 // Post型の定義
 interface Post {
@@ -30,14 +31,34 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // データを取得する
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 9;
+  const [totalPosts, setTotalPosts] = useState(0);
+
+  const router = useRouter();
+
+  // ページ変更時に呼ばれる関数
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    router.push(`/home?p=${page}`, undefined);
+  };
+
+  // 投稿データの取得
   useEffect(() => {
     const fetchPosts = async () => {
-      const { data: postData, error: postError } = await supabase.from("posts")
-        .select(`
-        *,
-        categories(*)
-        `);
+      const start = (currentPage - 1) * postsPerPage;
+      const end = currentPage * postsPerPage - 1;
+
+      const { data: postData, error: postError } = await supabase
+        .from("posts")
+        .select(
+          `
+      *,
+      categories(*)
+      `,
+        )
+        .range(start, end)
+        .order("updated_at", { ascending: false });
 
       if (postError) {
         console.error("postの取得でエラーが発生しました:", postError.message);
@@ -47,12 +68,32 @@ export default function Home() {
       }
       setIsLoading(false);
     };
+
+    // 投稿の総数を取得
+    const fetchTotalPosts = async () => {
+      const { count, error } = await supabase
+        .from("posts")
+        .select("*", { count: "exact" });
+      if (error) {
+        console.log("投稿数の取得でエラーが発生しました:", error.message);
+        setError(error.message);
+      } else {
+        setTotalPosts(count || 0);
+      }
+    };
+
     fetchPosts();
-  }, []);
+    fetchTotalPosts();
+  }, [currentPage]);
 
   // ローディング中の場合にメッセージを表示
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  // エラーが発生した場合にメッセージを表示
+  if (error) {
+    return <div>エラーが発生しました: {error}</div>;
   }
 
   return (
@@ -70,7 +111,7 @@ export default function Home() {
               <li key={post.id}>
                 <Link href={`/blog_view/${post.id}`}>
                   <BlogCard
-                    src={post.image_path || "/default.png"}
+                    src={post.image_path || "/default.jpg"}
                     title={post.title}
                     category={
                       post.categories ? post.categories.name : "Uncategorized"
@@ -84,7 +125,11 @@ export default function Home() {
             );
           })}
         </ul>
-        <Pagination />
+        <Pagination
+          count={Math.ceil(totalPosts / postsPerPage)}
+          page={currentPage}
+          onPageChange={handlePageChange}
+        />
       </main>
     </>
   );
