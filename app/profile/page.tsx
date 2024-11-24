@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Pagination from "../components/Pagination";
 import { useEffect, useState } from "react";
 import supabase from "@/lib/Supabase/Client";
 import Link from "next/link";
@@ -104,9 +103,7 @@ export default function Profile() {
           })}
         </ul>
       </main>
-      <footer className="text-center">
-        <Pagination />
-      </footer>
+      <footer className="text-center"></footer>
     </div>
   );
 }
