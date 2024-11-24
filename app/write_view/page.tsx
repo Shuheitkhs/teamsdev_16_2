@@ -207,7 +207,9 @@ const WriteView = () => {
               },
             })}
           ></textarea>
-          <p className="text-2xl text-red-500 bold">{errors.content?.message as ReactNode}</p>
+          <p className="text-2xl text-red-500 bold">
+            {errors.content?.message as ReactNode}
+          </p>
         </div>
         <div className="flex justify-end">
           <SubmitButton size="small" bgColor="blue" rounded="full">
